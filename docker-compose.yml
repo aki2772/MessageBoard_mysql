@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql:8.2.0
+    container_name: message_board-container
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${ROOT_PASS}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASS}
+      TZ: ${TZ}
+    ports:
+        - ${DB_PORT}:3306
+    volumes:
+        - ./mysql_data:/var/lib/mysql
+        - ./conf/my.cnf:/etc/mysql/conf.d/my.cnf
+#    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_general_ci','--default-time-zone=Asia/Tokyo']
